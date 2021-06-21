@@ -3,7 +3,7 @@ from typing import List
 
 root = 'Desktop'
 linie = "│"
-newfolder = "├──"
+new_folder = "├──"
 final = "└──"
 files = [
         'meetings/2021-01-12/notes.txt',
@@ -54,14 +54,14 @@ class DirectoryTreeGroup(DirectoryTreeComponent):
         if level == 0:
             print(self.name)
         else:
-            print(space * level + newfolder + self.name)
+            print(space * level + new_folder + self.name)
         for component in self.children:
             component.show(level + 1)
 
-    def getItem(self, component):
+    def get_Item(self, component):
         self.children.append(component)
 
-    def removeItem(self, component):
+    def remove_Item(self, component):
         self.children.remove(component)
 
 
@@ -72,7 +72,7 @@ class DirectoryTreeLeaf(DirectoryTreeComponent):
 
     def show(self, level):
         space = linie + "  " + linie + "  " * (level - 1)
-        print(space + linie + "  " + newfolder + self.name)
+        print(space + linie + "  " + new_folder + self.name)
 
 
 def tree(root: str, files: List[str]):
@@ -82,13 +82,13 @@ def tree(root: str, files: List[str]):
         append_to_tree(root, path.split('/'))
     for i in root:
         index = DirectoryTreeGroup(i)
-        topLevelMenu.getItem(index)
+        topLevelMenu.get_Item(index)
         for j in root[i]:
             next = DirectoryTreeGroup(j)
-            index.getItem(next)
+            index.get_Item(next)
             for k in root[i][j]:
                 file = DirectoryTreeLeaf(k)
-                index.getItem(file)
+                index.get_Item(file)
     topLevelMenu.show(0)
 
 
